@@ -1,0 +1,51 @@
+{
+    "notes": [{
+            "id": 1,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记第一个笔记第一个速记笔记第一个笔记"
+        },
+        {
+            "id": 2,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 3,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 4,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 5,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 6,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 7,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        },
+        {
+            "id": 8,
+            "type": "shortCut",
+            "title": "biaoti",
+            "content": "第一个速记笔记"
+        }
+    ]
+}

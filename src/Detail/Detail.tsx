@@ -3,15 +3,19 @@ import "./Detail.scss";
 
 type DetailProps = React.FC<{
   id: number;
+  width: number;
+  style: any;
+  className: string;
+  content: string;
 }>;
-const Detail: DetailProps = ({ id }) => {
+const Detail: DetailProps = ({ id, width, style, content }) => {
   return (
-    <div className="Detail" id={String(id)}>
-      <div
-        className="inner"
-        id={String(id)}
-        style={{ transform: `translate(${0}px,${0}px)` }}
-      ></div>
+    <div
+      className="inner unsplash-obj"
+      id={String(id)}
+      style={{ width: style.width }}
+    >
+      {content}
     </div>
   );
 };

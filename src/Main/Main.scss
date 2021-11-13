@@ -1,0 +1,22 @@
+.masonry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: masonry;
+}
+
+.item {
+    margin: 4px;
+    transition: all 0.6s ease-in-out;
+    background-color: white;
+    border-radius: 16px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 20px;
+    height: auto;
+}
+
+.big {
+    position: absolute;
+    width: 100%;
+    z-index: 999 !important;
+}
