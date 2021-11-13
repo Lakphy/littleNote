@@ -23,8 +23,10 @@ const Main: MainProps = ({}) => {
   const handleDetail = (e: MouseEvent<HTMLDivElement>) => {
     console.log(e.target);
     const target: any = e.target as any;
-    target.className = "item big";
-    target.style.width = boxWidth - 8;
+    if (!target.id) return;
+    if (target.id == showingCardId) {
+      return;
+    }
     setCardConfig((prev) => {
       return {
         ...prev,
@@ -35,24 +37,15 @@ const Main: MainProps = ({}) => {
     // target.style.transform = `translate(${-target.offsetLeft}px,${-target.offsetTop}px)`;
     setShowingCardId(target.id as number);
   }; // 点击卡片的回调函数
-
+  const handleClose = () => {
+    setShowingCardId(-1);
+  };
   const handleResize = (ev: WindowEventMap["resize"]) => {
     setBoxWidth(min(window.innerWidth, 1200));
     setCardWidth(
       (min(window.innerWidth, 1200) - (cardColumns + 1) * 8) / cardColumns
     );
   }; // 修改内容尺寸
-
-  const getAutoResponsiveProps = () => {
-    return {
-      containerWidth: boxWidth - 8,
-      transitionDuration: 0.5,
-      gridWidth: boxWidth / 2,
-      closeAnimation: true,
-      itemClassName: "inner",
-      itemMargin: 4,
-    };
-  };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize); // 监听
@@ -62,30 +55,57 @@ const Main: MainProps = ({}) => {
     console.log(showingCardId);
   }, [boxWidth, cardColumns, cardWidth, showingCardId]);
   return (
-    <div
-      className="Main"
-      onClick={handleDetail}
-      style={{ width: boxWidth - 8, margin: "0 auto" }}
-    >
+    <div className="Main" style={{ width: boxWidth - 8, margin: "0 auto" }}>
       <WaterFall
         columns={cardColumns}
         inner={jsonData.notes.map((item, index) => {
           return (
-            <div
-              className="item"
-              id={String(item.id)}
-              style={{
-                width: item.id == showingCardId ? boxWidth : cardWidth,
-                minHeight:
-                  item.id == showingCardId ? window.screen.height : "1px",
-                transform:
-                  item.id == showingCardId
-                    ? `translate(${cardConfig.left}px,${cardConfig.top}px)`
-                    : `translate(${0}px,${0}px)`,
-                transition: "all 0.6s ease-in-out",
-              }}
-            >
-              {item.content}
+            <div>
+              <div
+                className="item"
+                id={String(item.id)}
+                style={{
+                  width: item.id == showingCardId ? boxWidth : cardWidth,
+                  minHeight:
+                    item.id == showingCardId ? window.screen.height : "1px",
+                  transform:
+                    item.id == showingCardId
+                      ? `translate(${cardConfig.left}px,${cardConfig.top}px)`
+                      : `translate(${0}px,${0}px)`,
+                  transition: "all 0.6s ease-in-out",
+                  position: item.id == showingCardId ? "fixed" : "absolute",
+                  zIndex: item.id == showingCardId ? 999 : 1,
+                }}
+                onClick={handleDetail}
+              >
+                {item.id == showingCardId ? (
+                  <div className="card-detail">
+                    <div className="card-top-bar">
+                      <div className="card-close" onClick={handleClose}></div>
+                    </div>
+                    <div className="card-detail-content">
+                      <div className="card-title">{item.title}</div>
+                      <div className="card-p">{item.content}</div>
+                    </div>
+                  </div>
+                ) : (
+                  item.content
+                )}
+              </div>
+              <div
+                className="item"
+                id={String(item.id)}
+                style={{
+                  width: cardWidth,
+                  minHeight: "1px",
+                  transform: `translate(${0}px,${0}px)`,
+                  transition: "all 0.6s ease-in-out",
+                  position: "relative",
+                  zIndex: 0,
+                }}
+              >
+                {item.content}
+              </div>
             </div>
           );
         }, this)}
